@@ -1,0 +1,32 @@
+<app-home>
+    <div>
+        <h1 class="text-center">Danh sách tài khoản</h1>
+
+        <button (click)="goToCreateUser()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+        @if (info) {
+            <p class="text-info">{{ info }}</p>
+        }
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tên tài khoản</th>
+                    <th>Vai trò</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of users; track user._id) {
+                    <tr id='{{ user._id }}'>
+                        <th>{{ user.username }}</th>
+                        <th>{{ user.role }}</th>
+                        <th (click)="goToUpdateUser(user._id)" class="text-hover-red">&#9998; Sửa</th>
+                        <th (click)="deleteUser(user._id)" class="text-hover-red">&#10006; Xóa</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</app-home>

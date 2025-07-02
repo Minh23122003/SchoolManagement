@@ -1,0 +1,15 @@
+<div class="bg-info ms-auto me-auto text-center" style="width:25%; margin-top:250px">
+    <h2>Đăng nhập</h2>
+        
+    <label>Tên đăng nhập:</label><br>
+    <input type="text" name="username" [(ngModel)]="username"><br><br>
+
+    <label>Mật khẩu:</label><br>
+    <input type="password" name="password" [(ngModel)]="password"><br><br>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    <button (click)="login()" type="submit" class="mb-3">Đăng nhập</button>
+</div>

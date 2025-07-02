@@ -1,0 +1,30 @@
+<app-home>
+    <div>
+        <h1 class="text-center">Danh sách môn học</h1>
+
+        <button (click)="goToCreateSubject()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+        @if (info) {
+            <p class="text-info">{{ info }}</p>
+        }
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tên môn học</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (subject of subjects; track subject._id) {
+                    <tr id='{{ subject._id }}'>
+                        <th>{{ subject.name }}</th>
+                        <th (click)="goToUpdateSubject(subject._id)" class="text-hover-red">&#9998; Sửa</th>
+                        <th (click)="deleteSubject(subject._id)" class="text-hover-red">&#10006; Xóa</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</app-home>
