@@ -12,19 +12,19 @@ export class UserService {
         @InjectModel(User.name) private userModel: Model<UserDocument>,
     ) {}
 
-    async create(data: CreateUserDto) { 
-        const existing = await this.userModel.findOne({ username: data.username });
+    async create(createUserDto: CreateUserDto) { 
+        const existing = await this.userModel.findOne({ username: createUserDto.username });
         if (existing) {
             throw new ConflictException('Tên đăng nhập đã tồn tại!');
         }
 
         let hashedPassword = '';
-        hashedPassword = await bcrypt.hash(data.password, 4);
+        hashedPassword = await bcrypt.hash(createUserDto.password, 4);
 
         const user = new this.userModel({
-            username: data.username,
+            username: createUserDto.username,
             password: hashedPassword,
-            role: data.role,
+            role: createUserDto.role,
         });
 
         return await user.save();
@@ -46,19 +46,19 @@ export class UserService {
         return this.userModel.find({role: role}).exec();
     }
 
-    async update(id: string, data: UpdateUserDto) {      
-        const existing = await this.userModel.findOne({ username: data.username });
+    async update(id: string, updateUserDto: UpdateUserDto) {      
+        const existing = await this.userModel.findOne({ username: updateUserDto.username });
         if (existing && id != existing._id.toString()) {
             throw new ConflictException('Tên tài khoản đã tồn tại!');
         }
 
         let hashedPassword = ''
         let updated = null;
-        if(data.password !== undefined && data.password !== '') {
-            hashedPassword = await bcrypt.hash(data.password, 4);
-            return await this.userModel.findByIdAndUpdate(id, {username: data.username, role: data.role, password: hashedPassword}, { new: true });
+        if(updateUserDto.password !== undefined && updateUserDto.password !== '') {
+            hashedPassword = await bcrypt.hash(updateUserDto.password, 4);
+            return await this.userModel.findByIdAndUpdate(id, {username: updateUserDto.username, role: updateUserDto.role, password: hashedPassword}, { new: true });
         } else {
-            return await this.userModel.findByIdAndUpdate(id, {username: data.username, role: data.role, }, { new: true });
+            return await this.userModel.findByIdAndUpdate(id, {username: updateUserDto.username, role: updateUserDto.role, }, { new: true });
         }
     };
 

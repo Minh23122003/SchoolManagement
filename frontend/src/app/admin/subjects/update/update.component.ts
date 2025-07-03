@@ -19,6 +19,10 @@ export class UpdateComponent implements OnInit{
   constructor (private router: Router, private subjectsService: SubjectsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.getSubjectById();
+  }
+
+  getSubjectById(): void {
     this.id = String(this.route.snapshot.paramMap.get('id'));
     this.subjectsService.getSubjectById(this.id).subscribe({
       next: (res) => {

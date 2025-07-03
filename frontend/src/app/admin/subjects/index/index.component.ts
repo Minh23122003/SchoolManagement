@@ -47,7 +47,7 @@ export class IndexComponent implements OnInit{
         this.subjects = res;
       },
       error: (err) => {
-        alert("Lấy danh sách môn học thất bại!");
+        console.log(err);
       }
     })
   }

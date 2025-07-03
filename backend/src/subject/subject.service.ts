@@ -11,13 +11,13 @@ export class SubjectService {
         @InjectModel(Subject.name) private subjectModel: Model<SubjectDocument>,
     ) {}
 
-    async create(data: CreateSubjectDto) {
-        const existing = await this.subjectModel.findOne(data);
+    async create(createSubjectDto: CreateSubjectDto) {
+        const existing = await this.subjectModel.findOne(createSubjectDto);
         if (existing) {
             throw new ConflictException('Tên môn học đã tồn tại!');
         }
 
-        const subject  = new this.subjectModel(data);
+        const subject  = new this.subjectModel(createSubjectDto);
         return subject.save();
     };
 
@@ -29,13 +29,13 @@ export class SubjectService {
         return this.subjectModel.findById(id).exec();
     }
 
-    async update(id: string, data: UpdateSubjectDto) {    
-        const existing = await this.subjectModel.findOne({name: data.name});
+    async update(id: string, updateSubjectDto: UpdateSubjectDto) {    
+        const existing = await this.subjectModel.findOne({name: updateSubjectDto.name});
         if (existing && id !== existing._id.toString()) {
             throw new ConflictException('Tên môn học đã tồn tại!');
         }
 
-        return this.subjectModel.findByIdAndUpdate(id, data, { new: true });
+        return this.subjectModel.findByIdAndUpdate(id, updateSubjectDto, { new: true });
     };
 
     remove(id: string) {

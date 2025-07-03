@@ -13,7 +13,7 @@ export class StaffService {
   async create(createStaffDto: CreateStaffDto) {
     const existing = await this.staffModel.findOne({user: createStaffDto.user});
       if (existing) {
-        throw new ConflictException('Tên tài khoản đã được đăng ký ở một staff khác!');
+        throw new ConflictException('Tên tài khoản đã được đăng ký ở một nhân viên khác!');
       }
 
     const created = new this.staffModel(createStaffDto);
@@ -30,8 +30,8 @@ export class StaffService {
 
   async update(id: string, updateStaffDto: UpdateStaffDto) {
     const existing = await this.staffModel.findOne({user: updateStaffDto.user});
-    if (existing && existing._id !== id) {
-      throw new ConflictException('Tên tài khoản đã được đăng ký ở một staff khác!');
+    if (existing && id != existing._id) {
+      throw new ConflictException('Tên tài khoản đã được đăng ký ở một nhân viên khác!');
     }
 
     return this.staffModel.findByIdAndUpdate(id, updateStaffDto, {new: true});

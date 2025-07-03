@@ -24,6 +24,10 @@ export class UsersService {
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.urlApiUser}/${id}`);
   }
+
+  getUsersByRole(role: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.urlApiUser}/findRole/${role}`);
+  }
   
   postUser(user: Partial<User>): Observable<User> {
     return this.http.post<User>(this.urlApiUser, user);

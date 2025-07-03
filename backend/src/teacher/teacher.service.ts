@@ -13,7 +13,7 @@ export class TeacherService {
   async create(createTeacherDto: CreateTeacherDto) {
     const existing = await this.teacherModel.findOne({user: createTeacherDto.user});
     if (existing) {
-      throw new ConflictException('Tên tài khoản đã được đăng ký ở một teacher khác!');
+      throw new ConflictException('Tên tài khoản đã được đăng ký ở một giáo viên khác!');
     }
 
     const created = new this.teacherModel(createTeacherDto);
@@ -30,8 +30,8 @@ export class TeacherService {
 
   async update(id: string, updateTeacherDto: UpdateTeacherDto) {
     const existing = await this.teacherModel.findOne({user: updateTeacherDto.user});
-    if (existing && existing._id !== id) {
-      throw new ConflictException('Tên tài khoản đã được đăng ký ở một teacher khác!');
+    if (existing && id != existing._id) {
+      throw new ConflictException('Tên tài khoản đã được đăng ký ở một giáo viên khác!');
     }
 
     return this.teacherModel.findByIdAndUpdate(id, updateTeacherDto, {new: true});

@@ -9,8 +9,8 @@ export class SubjectController {
     constructor(private readonly subjectService: SubjectService) {};
 
     @Post()
-    create(@Body() body: CreateSubjectDto) {
-        return this.subjectService.create(body);
+    create(@Body() createSubjectDto: CreateSubjectDto) {
+        return this.subjectService.create(createSubjectDto);
     }
 
     @Get()
@@ -26,9 +26,9 @@ export class SubjectController {
     @Patch(':id')
     update(
         @Param('id') id: string,
-        @Body() body: UpdateSubjectDto,
+        @Body() updateSubjectDto: UpdateSubjectDto,
     ) {
-        return this.subjectService.update(id, body);
+        return this.subjectService.update(id, updateSubjectDto);
     }
 
     @Delete(':id')

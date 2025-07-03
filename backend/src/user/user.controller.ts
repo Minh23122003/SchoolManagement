@@ -8,8 +8,8 @@ export class UserController {
     constructor(private readonly userService: UserService) {};
     
     @Post()
-    create(@Body() body: CreateUserDto) {
-        return this.userService.create(body);
+    create(@Body() createUserDto: CreateUserDto) {
+        return this.userService.create(createUserDto);
     }
     
     @Get()
@@ -30,9 +30,9 @@ export class UserController {
     @Patch(':id')
     update(
         @Param('id') id: string,
-        @Body() body: UpdateUserDto,
+        @Body() updateUserDto: UpdateUserDto,
     ) {
-        return this.userService.update(id, body);
+        return this.userService.update(id, updateUserDto);
     }
 
     @Delete(':id')
