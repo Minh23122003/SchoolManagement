@@ -1,0 +1,28 @@
+<div>
+    <h1 class="text-center">Danh sách các khối</h1>
+
+    <button (click)="goToCreateGrade()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên khối</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (grade of grades; track grade._id) {
+                <tr id='{{ grade._id }}'>
+                    <th>{{ grade.name }}</th>
+                    <th (click)="goToUpdateGrade(grade._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteGrade(grade._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

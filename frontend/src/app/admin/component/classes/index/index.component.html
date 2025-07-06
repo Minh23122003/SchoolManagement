@@ -1,0 +1,32 @@
+<div>
+    <h1 class="text-center">Danh sách các lớp</h1>
+
+    <button (click)="goToCreateClass()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên lớp</th>
+                <th>Khối</th>
+                <th>Giáo viên chủ nhiệm</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (class of classes; track class._id) {
+                <tr id='{{ class._id }}'>
+                    <th>{{ class.name }}</th>
+                    <th>{{ class.grade.name }}</th>
+                    <th>{{ class.teacher.full_name }}</th>
+                    <th (click)="goToUpdateClass(class._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteClass(class._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

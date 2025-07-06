@@ -1,0 +1,52 @@
+<div>
+    <h1 class="text-center">Cập nhật giáo viên</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    @if (staff) {
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Họ và tên</label>
+                <input class="form-control" [(ngModel)]="staff.full_name" type="text" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Giới tính</label>
+                <select [(ngModel)]="staff.gender" name="" id="" class="form-select">
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Địa chỉ</label>
+                <input class="form-control" [(ngModel)]="staff.address" type="text" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Số điện thoại</label>
+                <input class="form-control" [(ngModel)]="staff.phone" type="number" name="" id="">
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Email</label>
+                <input class="form-control" [(ngModel)]="staff.email" type="email" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Tên tài khoản</label>
+                <select [(ngModel)]="staff.user._id" name="" id="" class="form-select">
+                    @for (user of users; track user._id) {
+                        <option [selected]="user._id === staff.user._id" value="{{ user._id }}">{{ user.username }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+
+    <button (click)="updateStaff()" class="btn btn-success">Cập nhật</button>
+</div>

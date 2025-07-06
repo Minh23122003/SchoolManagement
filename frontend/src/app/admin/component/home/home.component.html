@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-sm bg-light" style="margin-bottom: 70px;">
+  <div class="container-fluid">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class="btn">Trang chủ</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn" (click)="logout()">Đăng xuất</button>
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid row">
+    <div class="col-md-3">
+        <div class="bg-info d-flex align-items-center ps-2" style="height: 50px">Danh sách các bảng</div>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th (click)="goToUsers()" class="text-hover-red">Users</th>
+                    <th (click)="goToCreateUser()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToStaffs()" class="text-hover-red">Staffs</th>
+                    <th (click)="goToCreateStaff()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToTeachers()" class="text-hover-red">Teachers</th>
+                    <th (click)="goToCreateTeacher()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToSubjects()" class="text-hover-red">Subjects</th>
+                    <th (click)="goToCreateSubject()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToGrades()" class="text-hover-red">Grades</th>
+                    <th (click)="goToCreateGrade()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToSchoolYears()" class="text-hover-red">School-years</th>
+                    <th (click)="goToCreateSchoolYear()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToClasses()" class="text-hover-red">Classes</th>
+                    <th (click)="goToCreateClass()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToStudents()" class="text-hover-red">Students</th>
+                    <th (click)="goToCreateStudent()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+                <tr>
+                    <th (click)="goToScores()" class="text-hover-red">Scores</th>
+                    <th (click)="goToCreateScore()" class="text-hover-red">&#43; Thêm</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-9" style="padding-left: 100px;">
+      <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div>
+    <h1 class="text-center">Thêm lớp học</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    <div class="container row mb-3">
+        <div class="col-md-6">
+            <label class="mb-3" for="">Tên lớp</label>
+            <input class="form-control" [(ngModel)]="class.name" type="text" name="" id="">
+        </div>
+    </div>
+
+    <div class="container row mb-3">
+        <div class="col-md-6">
+            <label class="mb-3" for="">Tên khối</label>
+            <select [(ngModel)]="class.grade" name="" id="" class="form-select">
+                @for (grade of grades; track grade._id) {
+                    <option value="{{ grade._id }}">{{ grade.name }}</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="mb-3" for="">Tên giáo viên chủ nhiệm</label>
+            <select [(ngModel)]="class.teacher" name="" id="" class="form-select">
+                @for (teacher of teachers; track teacher._id) {
+                    <option value="{{ teacher._id }}">{{ teacher.full_name }}</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <button (click)="createClass()" class="btn btn-success">Thêm</button>
+</div>

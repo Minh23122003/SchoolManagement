@@ -5,9 +5,8 @@ export class CreateClassDto {
     @IsNotEmpty()
     name: string;
 
-    @IsOptional()
     @IsMongoId()
-    teacher?: string;
+    teacher: string;
 
     @IsString()
     @IsNotEmpty()

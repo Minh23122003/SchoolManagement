@@ -1,0 +1,16 @@
+<div>
+    <h1 class="text-center">Cập nhật khối học</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    @if (grade) {
+        <div class="mb-3">
+            <label class="mb-3" for="">Tên môn học</label>
+            <input class="form-control" style="width: 30%;" [(ngModel)]="grade.name" type="text" value="asd">
+        </div>
+    }
+
+    <button (click)="updateGrade()" class="btn btn-success">Cập nhật</button>
+</div>

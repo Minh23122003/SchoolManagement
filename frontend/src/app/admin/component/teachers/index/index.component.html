@@ -1,0 +1,40 @@
+<div>
+    <h1 class="text-center">Danh sách giáo viên</h1>
+
+    <button (click)="goToCreateTeacher()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Giới tính</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Tên tài khoản</th>
+                <th>Tên môn học dạy</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (teacher of teachers; track teacher._id) {
+                <tr id='{{ teacher._id }}'>
+                    <th>{{ teacher.full_name }}</th>
+                    <th>{{ teacher.gender==='male'?'Nam':teacher.gender==='female'?'Nữ':'Khác' }}</th>
+                    <th>{{ teacher.address }}</th>
+                    <th>{{ teacher.phone }}</th>
+                    <th>{{ teacher.email }}</th>
+                    <th>{{ teacher.user.username }}</th>
+                    <th>{{ teacher.subject.name }}</th>
+                    <th (click)="goToUpdateTeacher(teacher._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteTeacher(teacher._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

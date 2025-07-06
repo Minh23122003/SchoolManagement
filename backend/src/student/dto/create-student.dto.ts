@@ -3,8 +3,12 @@ import { IsEnum, IsMongoId, IsNotEmpty, IsOptional, IsString } from "class-valid
 export class CreateStudentDto {
     @IsString()
     @IsNotEmpty()
-    full_name: string;
-        
+    first_name: string;
+    
+    @IsString()
+    @IsNotEmpty()
+    last_name: string;
+
     @IsEnum(['male', 'female', 'other'])
     gender: 'male' | 'female' | 'other';
 
@@ -16,7 +20,6 @@ export class CreateStudentDto {
     @IsNotEmpty()
     address: string;
 
-    @IsOptional()
     @IsMongoId()
-    grade: string;
+    class: string;
 }

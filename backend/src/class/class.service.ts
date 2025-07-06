@@ -16,12 +16,9 @@ export class ClassService {
         if (existingName) {
             throw new ConflictException('Tên lớp học đã tồn tại!');
         }
-
-    if(createClassDto.teacher !== undefined){
-      const existingTeacher = await this.classModel.findOne({teacher: createClassDto.teacher});
-      if (existingTeacher) {
-          throw new ConflictException('Giáo viên đã thuộc 1 lớp khác!');
-      }
+    const existingTeacher = await this.classModel.findOne({teacher: createClassDto.teacher});
+    if (existingTeacher) {
+        throw new ConflictException('Giáo viên đã thuộc 1 lớp khác!');
     }
     
     const Class  = new this.classModel(createClassDto);

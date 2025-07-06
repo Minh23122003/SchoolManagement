@@ -6,7 +6,10 @@ export type StudentDocument = Student & Document;
 @Schema({timestamps: true, })
 export class Student {
     @Prop({required: true, unique: true})
-    full_name: string;
+    first_name: string;
+
+    @Prop({required: true, unique: true})
+    last_name: string;
 
     @Prop({ required: true })
     gender: 'male' | 'female' | 'other';
@@ -17,8 +20,8 @@ export class Student {
     @Prop({required: true})
     address: string;
 
-    @Prop({ type: Types.ObjectId, ref: 'Class', required: false })
-    class?: Types.ObjectId;
+    @Prop({ type: Types.ObjectId, ref: 'Class', required: true })
+    class: Types.ObjectId;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);

@@ -1,0 +1,51 @@
+<div>
+    <h1 class="text-center">Cập nhật học sinh</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+    @if (student) {
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Họ và tên đệm</label>
+                <input class="form-control" [(ngModel)]="student.first_name" type="text" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Tên học sinh</label>
+                <input class="form-control" [(ngModel)]="student.last_name" type="text" name="" id="">
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Giới tính</label>
+                <select [(ngModel)]="student.gender" name="" id="" class="form-select">
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                    <option value="pther">Khác</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Ngày sinh</label>
+                <input class="form-control" [(ngModel)]="student.birthday" type="date" name="" id="">
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Địa chỉ</label>
+                <input class="form-control" [(ngModel)]="student.address" type="text" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Lớp học</label>
+                <select [(ngModel)]="student.class._id" name="" id="" class="form-select">
+                    @for (class of classes; track class._id) {
+                        <option [selected]="class._id===student.class._id" value="{{ class._id }}">{{ class.name }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+
+    <button (click)="updateStudent()" class="btn btn-success">Cập nhật</button>
+</div>

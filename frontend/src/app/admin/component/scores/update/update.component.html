@@ -1,0 +1,63 @@
+<div>
+    <h1 class="text-center">Cập nhật điểm</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    @if (score) {
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Điểm</label>
+                <input class="form-control" [(ngModel)]="score.score" type="number" name="" id="">
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Loại</label>
+                <select [(ngModel)]="score.type" name="" id="" class="form-select">
+                    <option value="15m">15 phút</option>
+                    <option value="45m">1 tiết</option>
+                    <option value="final">Cuối kỳ</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Môn học</label>
+                <select [(ngModel)]="score.subject._id" name="" id="" class="form-select">
+                    @for (subject of subjects; track subject._id) {
+                        <option value="{{ subject._id }}">{{ subject.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Học sinh</label>
+                <select [(ngModel)]="score.student._id" name="" id="" class="form-select">
+                    @for (student of students; track student._id) {
+                        <option value="{{ student._id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Học kỳ</label>
+                <select [(ngModel)]="score.semester" name="" id="" class="form-select">
+                    <option value=1>Học kỳ 1</option>
+                    <option value=2>Học kỳ 2</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Năm học</label>
+                <select [(ngModel)]="score.school_year._id" name="" id="" class="form-select">
+                    @for (schoolYear of schoolYears; track schoolYear._id) {
+                        <option value="{{ schoolYear._id }}">{{ schoolYear.name }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+
+    <button (click)="updateScore()" class="btn btn-success">Cập nhật</button>
+</div>

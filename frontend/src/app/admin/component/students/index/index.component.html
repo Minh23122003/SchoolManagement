@@ -1,0 +1,38 @@
+<div>
+    <h1 class="text-center">Danh sách học sinh</h1>
+
+    <button (click)="goToCreateStudent()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Lớp</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (student of students; track student._id) {
+                <tr id='{{ student._id }}'>
+                    <th>{{ student.first_name }}</th>
+                    <th>{{ student.last_name }}</th>
+                    <th>{{ student.gender==='male'?'Nam':student.gender==='female'?'Nữ':'Khác' }}</th>
+                    <th>{{ student.birthday }}</th>
+                    <th>{{ student.address }}</th>
+                    <th>{{ student.class.name }}</th>
+                    <th (click)="goToUpdateStudent(student._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteStudent(student._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

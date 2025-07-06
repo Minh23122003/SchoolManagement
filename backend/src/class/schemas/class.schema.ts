@@ -11,8 +11,8 @@ export class Class {
     @Prop({ type: Types.ObjectId, ref: 'Grade', required: true})
     grade: Types.ObjectId;
 
-    @Prop({ type: Types.ObjectId, ref: 'Teacher', required: false, unique: true })
-    teacher?: Types.ObjectId;
+    @Prop({ type: Types.ObjectId, ref: 'Teacher', required: false, unique: true})
+    teacher: Types.ObjectId;
 }
 
 export const ClassSchema = SchemaFactory.createForClass(Class);

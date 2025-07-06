@@ -48,7 +48,32 @@ export class ScoreService {
     return this.scoreModel.findById(id).populate(['subject', 'student', 'school_year']).exec();
   }
 
-  update(id: string, updateScoreDto: UpdateScoreDto) {
+  async update(id: string, updateScoreDto: UpdateScoreDto) {
+    if(updateScoreDto.type === '45m' || updateScoreDto.type === 'final'){
+      const existing = await this.scoreModel.findOne({
+        subject: updateScoreDto.subject,
+        student: updateScoreDto.student,
+        semester: updateScoreDto.semester,
+        school_year: updateScoreDto.school_year,
+        type: updateScoreDto.type
+      });
+      if (existing && id !== existing._id.toString()) {
+        throw new ConflictException('Môn học đã có điểm kiểm tra!');
+      }
+    }else {
+      const existing = await this.scoreModel.find({
+        subject: updateScoreDto.subject,
+        student: updateScoreDto.student,
+        semester: updateScoreDto.semester,
+        school_year: updateScoreDto.school_year,
+        type: updateScoreDto.type
+      });
+      if(existing.length === 3 && id !== existing[0]._id.toString() 
+        && id !== existing[1]._id.toString() && id !== existing[2]._id.toString()){
+        throw new ConflictException('Môn học đã đủ điểm 15 phút!');
+      }
+    }
+
     return this.scoreModel.findByIdAndUpdate(id, updateScoreDto, { new: true });
   }
 

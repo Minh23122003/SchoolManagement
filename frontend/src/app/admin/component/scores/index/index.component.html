@@ -1,0 +1,38 @@
+<div>
+    <h1 class="text-center">Danh sách điểm học sinh</h1>
+
+    <button (click)="goToCreateScore()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Điểm</th>
+                <th>Loại bài kiểm tra</th>
+                <th>Học sinh</th>
+                <th>Môn học</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (score of scores; track score._id) {
+                <tr id='{{ score._id }}'>
+                    <th>{{ score.score }}</th>
+                    <th>{{ score.type }}</th>
+                    <th>{{ score.student.first_name }} {{ score.student.last_name }}</th>
+                    <th>{{ score.subject.name }}</th>
+                    <th>{{ score.semester }}</th>
+                    <th>{{ score.school_year.name }}</th>
+                    <th (click)="goToUpdateScore(score._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteScore(score._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
