@@ -1,0 +1,42 @@
+<div>
+    <h1 class="text-center">Danh sách thời khóa biểu</h1>
+
+    <button (click)="goToCreateSchedule()" class="btn btn-primary mb-3">&#43; Thêm</button>
+
+    @if (info) {
+        <p class="text-info">{{ info }}</p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Môn học</th>
+                <th>Lớp</th>
+                <th>Giáo viên</th>
+                <th>Buổi</th>
+                <th>Ngày</th>
+                <th>Tiết</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (schedule of schedules; track schedule._id) {
+                <tr id='{{ schedule._id }}'>
+                    <th>{{ schedule.subject.name }}</th>
+                    <th>{{ schedule.class.name }}</th>
+                    <th>{{ schedule.teacher.full_name }}</th>
+                    <th>{{ schedule.session }}</th>
+                    <th>{{ schedule.weekday }}</th>
+                    <th>{{ schedule.period }}</th>
+                    <th>{{ schedule.semester }}</th>
+                    <th>{{ schedule.school_year.name }}</th>
+                    <th (click)="goToUpdateSchedule(schedule._id)" class="text-hover-red">&#9998; Cập nhật</th>
+                    <th (click)="deleteSchedule(schedule._id)" class="text-hover-red">&#10006; Xóa</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

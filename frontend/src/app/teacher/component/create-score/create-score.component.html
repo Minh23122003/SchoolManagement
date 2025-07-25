@@ -1,0 +1,68 @@
+@if (teacher !== undefined) {
+    <div class="container row" style="margin-left: 50px;">
+        <div class="col-md-4">
+            <div class="col-md-6">
+                <div>
+                    <label class="mb-3" for="">Chọn lớp</label>
+                    <select [(ngModel)]="classSelected" name="" id="" class="form-select mb-3">
+                        @for (class of getClassesByTeacher(); track class) {
+                            <option [selected]="class===getClassesByTeacher()[0]" value="{{ class }}">{{ getClassById(class).name }}</option>
+                        }
+                    </select>
+                </div>
+                <button (click)="getStudentsByClass(classSelected)" class="btn btn-info">Xem</button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            @if (studentsInput.length!==0) {
+                <div class="container row mb-3">
+                    <div class="col-md-6 row">
+                        <label class="col-md-4 col-form-label" for="">Học kỳ</label>
+                        <select [(ngModel)]="semesterSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 row">
+                        <label class="col-md-4 col-form-label" for="">Năm học</label>
+                        <select [(ngModel)]="schoolYearSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                            @for (schoolYear of schoolYears; track schoolYear._id) {
+                                <option value="{{ schoolYear._id }}">{{ schoolYear.name }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="container row mb-3">
+                    <div class="col-md-6 row">
+                        <label class="col-md-4 col-form-label" for="">Loại điểm</label>
+                        <select [(ngModel)]="typeSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                            <option value="15m">15 phút</option>
+                            <option value="45m">1 tiết</option>
+                            <option value="final">Cuối kỳ</option>
+                        </select>
+                    </div>
+                </div>
+                @if (error) {
+                    <p class="text-danger">{{ error }}</p>
+                }
+                <button (click)="createScores()" class="btn btn-info mb-3">Gửi</button>
+                <table class="table table-bordered text-center align-middle mb-5" style="width: 50%;">
+                    <thead>
+                        <tr>
+                            <th>Họ và tên</th>
+                            <th>Điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (student of studentsInput; let i = $index;track student._id) {
+                            <tr>
+                                <th>{{ student.first_name }} {{ student.last_name }}</th>
+                                <th><input [(ngModel)]="scoresInput[i]" class="form-control" type="number"></th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}

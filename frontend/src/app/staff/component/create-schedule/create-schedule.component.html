@@ -1,0 +1,87 @@
+<h1 class="text-center mb-3">Tạo thời khóa biểu</h1>
+
+<div class="ms-auto me-auto text-center" style="width: 50%;">
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+</div>
+
+<div class="ms-auto me-auto text-center" style="width: 70%;">
+    <div class="container row mb-3">
+        <div class="col-md-6 row">
+            <label class="mb-3 col-md-4" for="">Lớp</label>
+            <select [(ngModel)]="classSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                @for (class of classes; track class._id) {
+                    <option value="{{ class._id }}">{{ class.name }}</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6 row">
+            <label class="mb-3 col-md-4" for="">Buổi</label>
+            <select [(ngModel)]="sessionSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                <option value="morning">Sáng</option>
+                <option value="afternoon">Chiều</option>
+            </select>
+        </div>
+    </div>
+    <div class="container row mb-3">
+        <div class="col-md-6 row">
+            <label class="col-md-4 col-form-label" for="">Học kỳ</label>
+            <select [(ngModel)]="semesterSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+        <div class="col-md-6 row">
+            <label class="col-md-4 col-form-label" for="">Năm học</label>
+            <select [(ngModel)]="schoolYearSelected" name="" id="" class="form-select col-md-8" style="width: 50%;">
+                @for (schoolYear of schoolYears; track schoolYear._id) {
+                    <option value="{{ schoolYear._id }}">{{ schoolYear.name }}</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+
+<button (click)="createSchedules()" class="btn btn-success mb-3 mt-3" style="margin-left: 300px;">Tạo</button>
+
+<div class="container text-center">
+    <table class="table table-bordered text-center align-middle ms-5" style="width: 80%;">
+        <thead class="table-dark">
+            <tr>
+                <th>Tiết / Thứ</th>
+                @for (day of days; track day) {
+                    <th>{{ changeDayToVietnamese(day) }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (period of periods; track period) {
+                <tr>
+                    <th>Tiết {{ period }}</th>
+                    @for (day of days; track day) {
+                        <th>
+                            <div class="mb-3">
+                                <label class="mb-3" for="">Môn học</label>
+                                <select [(ngModel)]="scheduleTable[day][period].subject" name="" id="" class="form-select">
+                                    <option value="No">Nghỉ học</option>
+                                    @for (subject of subjects; track subject._id) {
+                                        <option value="{{ subject._id }}">{{ subject.name }}</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="mb-3" for="">Giáo viên</label>
+                                <select [disabled]="scheduleTable[day][period].subject==='' || scheduleTable[day][period].subject==='No'" [(ngModel)]="scheduleTable[day][period].teacher" name="" id="" class="form-select">
+                                    @for (teacher of getTeacherBySubject(day, period); track teacher._id) {
+                                        <option value="{{ teacher._id }}">{{ teacher.full_name }}</option>
+                                    }
+                                </select>
+                            </div>
+                        </th>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

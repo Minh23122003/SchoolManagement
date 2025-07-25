@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm bg-dark" style="margin-bottom: 70px;">
+  <div class="container-fluid">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class="btn text-white" (click)="goToHome()">Trang chủ</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn text-white" (click)="goToManageStudent()">Quản lý học sinh</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn text-white" (click)="goToManageSchedule()">Thời khóa biểu cá nhân</button>
+      </li>
+      <li class="nav-item dropdown">
+        <button type="button" class="btn text-white dropdown-toggle btn-hover-blue" data-bs-toggle="dropdown">
+          Quản lý điểm
+        </button>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item btn btn-hover-blue" (click)="goToManageScore()">Danh sách điểm học sinh</button></li>
+          <li><button class="dropdown-item btn btn-hover-blue" (click)="goToCreateScore()">Tạo điểm mới</button></li>
+          <li><button class="dropdown-item btn btn-hover-blue" (click)="goToUpdateScore()">Cập nhật điểm</button></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <button class="btn text-white" (click)="logout()">Đăng xuất</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

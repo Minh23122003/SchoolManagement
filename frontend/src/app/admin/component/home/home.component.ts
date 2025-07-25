@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,19 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
 
-  constructor (private router: Router) {}
+  constructor (private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    this.authService.logout();
     this.router.navigate(['login']);
+  }
+
+  goToHome(): void {
+    this.router.navigate(['admin']);
   }
 
   goToSubjects(): void {
@@ -93,5 +97,13 @@ export class HomeComponent implements OnInit{
 
   goToCreateSchoolYear(): void {
     this.router.navigate(['admin', 'school-years', 'create']);
+  }
+
+  goToSchedules(): void {
+    this.router.navigate(['admin', 'schedules']);
+  }
+
+  goToCreateSchedule(): void {
+    this.router.navigate(['admin', 'schedules', 'create']);
   }
 }

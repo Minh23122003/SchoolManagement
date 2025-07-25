@@ -28,7 +28,27 @@ import { UpdateComponent as UpdateStudentComponent } from './admin/component/stu
 import { IndexComponent as IndexScoreComponent } from './admin/component/scores/index/index.component';
 import { CreateComponent as CreateScoreComponent } from './admin/component/scores/create/create.component';
 import { UpdateComponent as UpdateScoreComponent } from './admin/component/scores/update/update.component';
-import { AuthAdminGuard } from './admin/guards/auth-admin.guard';
+import { IndexComponent as IndexScheduleComponent } from './admin/component/schedules/index/index.component';
+import { CreateComponent as CreateScheduleComponent } from './admin/component/schedules/create/create.component';
+import { UpdateComponent as UpdateScheduleComponent } from './admin/component/schedules/update/update.component';
+import { AuthGuard as AuthAdminGuard } from './admin/guard/auth.guard';
+
+import { HomeComponent as HomeStaffComponent } from './staff/component/home/home.component';
+import { AuthGuard as AuthStaffGuard } from './staff/guard/auth.guard';
+import { ManageStudentComponent as ManageStudentStaffComponent } from './staff/component/manage-student/manage-student.component';
+import { CreateStudentComponent as CreateStudentStaffComponent } from './staff/component/create-student/create-student.component';
+import { UpdateStudentComponent as UpdateStudentStaffComponent } from './staff/component/update-student/update-student.component';
+import { ManageScheduleComponent as ManageScheduleStaffComponent } from './staff/component/manage-schedule/manage-schedule.component';
+import { CreateScheduleComponent as CreateScheduleStaffComponent } from './staff/component/create-schedule/create-schedule.component';
+import { UpdateScheduleComponent as UpdateScheduleStaffComponent } from './staff/component/update-schedule/update-schedule.component';
+
+import { HomeComponent as HomeTeacherComponent } from './teacher/component/home/home.component';
+import { AuthGuard as AuthTeacherGuard } from './teacher/guard/auth.guard';
+import { ManageStudentComponent as ManageStudentTeacherComponent } from './teacher/component/manage-student/manage-student.component';
+import { ManageScheduleComponent as ManageScheduleTeacherComponent } from './teacher/component/manage-schedule/manage-schedule.component';
+import { ManageScoreComponent as ManageScoresTeacherComponent } from './teacher/component/manage-score/manage-score.component';
+import { CreateScoreComponent as CreateScoresTeacherComponent } from './teacher/component/create-score/create-score.component';
+import { UpdateScoreComponent as UpdateScoresTeacherComponent } from './teacher/component/update-score/update-score.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -81,6 +101,36 @@ export const routes: Routes = [
         { path: 'scores', component: IndexScoreComponent },
         { path: 'scores/create', component: CreateScoreComponent },
         { path: 'scores/:id/update', component: UpdateScoreComponent },
+
+        // SCHEDULES
+        { path: 'schedules', component: IndexScheduleComponent },
+        { path: 'schedules/create', component: CreateScheduleComponent },
+        { path: 'schedules/:id/update', component: UpdateScheduleComponent },
+      ]
+    },
+    {
+      path: 'staff',
+      component: HomeStaffComponent,
+      canActivate: [AuthStaffGuard],
+      children: [
+        { path: 'manage-students', component: ManageStudentStaffComponent },
+        { path: 'manage-students/create', component: CreateStudentStaffComponent},
+        { path: 'manage-students/:id/update', component: UpdateStudentStaffComponent},
+        { path: 'manage-schedules', component: ManageScheduleStaffComponent },
+        { path: 'manage-schedules/create', component: CreateScheduleStaffComponent},
+        { path: 'manage-schedules/update', component: UpdateScheduleStaffComponent},
+      ],
+    },
+    {
+      path: 'teacher',
+      component: HomeTeacherComponent,
+      canActivate: [AuthTeacherGuard],
+      children: [
+        { path: 'manage-students', component: ManageStudentTeacherComponent},
+        { path: 'manage-schedules', component: ManageScheduleTeacherComponent},
+        { path: 'manage-scores', component: ManageScoresTeacherComponent},
+        { path: 'manage-scores/create', component: CreateScoresTeacherComponent},
+        { path: 'manage-scores/update', component: UpdateScoresTeacherComponent},
       ]
     },
     { path: '', redirectTo: 'login', pathMatch: 'full' },

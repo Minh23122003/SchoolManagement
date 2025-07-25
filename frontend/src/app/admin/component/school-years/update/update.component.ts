@@ -37,7 +37,7 @@ export class UpdateComponent implements OnInit{
       this.schoolYearsService.updateSchoolYear(this.schoolYear).subscribe({
         next: (res) => {
           alert('Cập nhật thành công!');
-          this.router.navigate(['admin', 'grades']);
+          this.router.navigate(['admin', 'school-years']);
         }, error: (err) => {
           this.error = err.error.message;
         }

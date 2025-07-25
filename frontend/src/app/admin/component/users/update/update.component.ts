@@ -45,7 +45,7 @@ export class UpdateComponent implements OnInit{
       }
       this.usersService.updateUser(this.user).subscribe({
         next: (res) => {
-          alert('Thay đổi thành công!');
+          alert('Cập nhật thành công!');
           this.router.navigate(['admin', 'users']);
         }, error: (err) => {
           this.error = err.error.message;

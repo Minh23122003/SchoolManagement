@@ -64,7 +64,7 @@ export class UpdateComponent implements OnInit{
 
       this.studentsService.updateStudent(cloneStudent).subscribe({
         next: (res) => {
-          alert('Tạo thành công!');
+          alert('Cập nhật thành công!');
           this.router.navigate(['admin', 'students']);
         },
         error: (err) => {

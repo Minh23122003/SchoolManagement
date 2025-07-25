@@ -1,0 +1,91 @@
+<div>
+    <h1 class="text-center">Cập nhật thời khóa biểu</h1>
+
+    @if (error) {
+        <p class="text-danger">{{ error }}</p>
+    }
+
+    @if (schedule) {
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Môn học</label>
+                <select [(ngModel)]="schedule.subject._id" name="" id="" class="form-select">
+                    @for (subject of subjects; track subject._id) {
+                        <option value="{{ subject._id }}">{{ subject.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Lớp</label>
+                <select [(ngModel)]="schedule.class._id" name="" id="" class="form-select">
+                    @for (class of classes; track class._id) {
+                        <option value="{{ class._id }}">{{ class.name }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Giáo viên</label>
+                <select [(ngModel)]="schedule.teacher._id" name="" id="" class="form-select">
+                    @for (teacher of teachers; track teacher._id) {
+                        <option value="{{ teacher._id }}">{{ teacher.full_name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Buổi</label>
+                <select [(ngModel)]="schedule.session" name="" id="" class="form-select">
+                    <option value="morning">Sáng</option>
+                    <option value="afternoon">Chiều</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Ngày</label>
+                <select [(ngModel)]="schedule.weekday" name="" id="" class="form-select">
+                    <option value="Monday">Thứ 2</option>
+                    <option value="Tuesday">Thứ 3</option>
+                    <option value="Wednesday">Thứ 4</option>
+                    <option value="Thursday">Thứ 5</option>
+                    <option value="Friday">Thứ 6</option>
+                    <option value="Saturday">Thứ 7</option>
+                    <option value="Sunday">Chủ nhật</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Tiết</label>
+                <select [(ngModel)]="schedule.period" name="" id="" class="form-select">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container row mb-3">
+            <div class="col-md-6">
+                <label class="mb-3" for="">Học kỳ</label>
+                <select [(ngModel)]="schedule.semester" name="" id="" class="form-select">
+                    <option value=1>Học kỳ 1</option>
+                    <option value=2>Học kỳ 2</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="mb-3" for="">Năm học</label>
+                <select [(ngModel)]="schedule.school_year._id" name="" id="" class="form-select">
+                    @for (schoolYear of schoolYears; track schoolYear._id) {
+                        <option value="{{ schoolYear._id }}">{{ schoolYear.name }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+
+    <button (click)="updateSchedule()" class="btn btn-success">Cập nhật</button>
+</div>

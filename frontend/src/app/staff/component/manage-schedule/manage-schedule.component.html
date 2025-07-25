@@ -1,0 +1,72 @@
+<div class="container row" style="margin-left: 50px;">
+    <div class="col-md-4">
+        <div class="col-md-6">
+            <div>
+                <label class="mb-3" for="">Chọn lớp học</label>
+                <select [(ngModel)]="classSelected" name="" id="" class="form-select mb-3">
+                    @for (class of classes; track class._id) {
+                        <option value="{{ class._id }}">{{ class.name }}</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="mb-3" for="">Chọn học kỳ</label>
+                <select [(ngModel)]="semesterSelected" name="" id="" class="form-select mb-3">
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-3" for="">Chọn năm học</label>
+                <select [(ngModel)]="schoolYearSelected" name="" id="" class="form-select mb-3">
+                    @for (schoolYear of schoolYears; track schoolYear._id) {
+                        <option value="{{ schoolYear._id }}">{{ schoolYear.name }}</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="mb-3" for="">Chọn buổi học</label>
+                <select [(ngModel)]="sessionSelected" name="" id="" class="form-select mb-3">
+                    <option value="morning">Buổi sáng</option>
+                    <option value="afternoon">Buổi chiều</option>
+                </select>
+            </div>
+            @if (error) {
+                <p class="text-danger">{{ error }}</p>
+            }
+            <button (click)="getScheduleByClass()" class="btn btn-info">Xem thời khóa biểu</button>
+        </div>
+    </div>
+    <div class="col-md-8">
+        @if (scheduleTable[days[0]][periods[0]].subject !== '') {
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Tiết / Thứ</th>
+                        @for (day of days; track day) {
+                            <th>{{ changeDayToVietnamese(day) }}</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (period of periods; track period) {
+                        <tr>
+                            <th>Tiết {{ period }}</th>
+                            @for (day of days; track day) {
+                                @if (scheduleTable[day][period].subject==='No') {
+                                    <th>Nghỉ học</th>
+                                }
+                                @else {
+                                    <th>
+                                        <div class="mb-3">Môn: {{getSubjectById(scheduleTable[day][period].subject).name}}</div>
+                                        <div>Gv: {{getTeacherById(scheduleTable[day][period].teacher).full_name}}</div>
+                                    </th>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+        </table>
+        }
+    </div>
+</div>

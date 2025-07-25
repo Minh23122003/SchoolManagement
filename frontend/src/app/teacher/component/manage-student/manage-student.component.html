@@ -1,0 +1,44 @@
+@if (teacher !== undefined) {
+    <div class="container row" style="margin-left: 50px;">
+        <div class="col-md-4">
+            <h4>Danh sách các lớp</h4>
+            <ul>
+                @for (class of getClassesByTeacher(); track $index) {
+                    @if (getClassById(class).teacher._id===teacher._id) {
+                        <li (click)="classSelected=class" class="text-hover-red">{{ getClassById(class).name }} (Lớp chủ nhiệm)</li>
+                    }
+                    @else {
+                        <li (click)="classSelected=class" class="text-hover-red">{{ getClassById(class).name }}</li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="col-md-8">
+            @if (classSelected) {
+                <h1 class="text-center mb-3">Danh sách học sinh</h1>
+                <table class="table-striped table">
+                    <thead>
+                        <tr>
+                            <th>Họ và tên đệm</th>
+                            <th>Tên</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Lớp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (student of getStudentsByClass(classSelected); track student._id) {
+                            <tr>
+                                <th>{{ student.first_name }}</th>
+                                <th>{{ student.last_name }}</th>
+                                <th>{{ student.gender==='male'?'Nam':student.gender==='female'?'Nữ':'Khác' }}</th>
+                                <th>{{ student.birthday }}</th>
+                                <th>{{ student.class.name }}</th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
